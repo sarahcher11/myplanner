@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<?import javafx.scene.control.TextField?>
+<AnchorPane prefHeight="517.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TP.App">
+   <children>
+      <Label layoutX="24.0" layoutY="83.0" prefHeight="18.0" prefWidth="109.0" text="Nom de la tache" />
+      <TextField layoutX="173.0" layoutY="70.0" />
+      <DatePicker layoutX="173.0" layoutY="136.0" />
+   </children>
+</AnchorPane>

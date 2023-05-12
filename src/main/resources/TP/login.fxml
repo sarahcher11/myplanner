@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TP.Controllers.Controller">
+   <children>
+      <Pane layoutX="307.0" layoutY="-99.0" prefHeight="557.0" prefWidth="332.0">
+         <children>
+            <ImageView fitHeight="614.0" fitWidth="403.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/loginfill.jpg" />
+               </image>
+            </ImageView>
+            <VBox layoutX="68.0" layoutY="267.0" prefHeight="176.0" prefWidth="234.0">
+               <children>
+                  <TextField fx:id="info" prefHeight="38.0" prefWidth="247.0" promptText="pseudo" style="-fx-background-radius: 50; -fx-border-radius: 50;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button fx:id="login" mnemonicParsing="false" onAction="#seConnecter" prefHeight="38.0" prefWidth="282.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-alignment: center; -fx-background-color: #B64D85; -fx-border-color: grey;" text="Login">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="errorLabel" alignment="CENTER" prefHeight="33.0" prefWidth="232.0" style="-fx-text-fill: red;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+
+            <VBox layoutX="93.0" layoutY="217.0" prefHeight="62.0" prefWidth="184.0">
+               <children>
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="216.0" text="My Desktop">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="188.0" style="-fx-font-weight: bold;" text="Planner">
+                     <font>
+                        <Font name="Consolas" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane layoutX="-2.0" layoutY="-4.0" prefHeight="416.0" prefWidth="365.0">
+         <children>
+            <ImageView fitHeight="605.0" fitWidth="382.0" layoutX="-31.0" layoutY="-93.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/loginPage.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="cancel" layoutX="256.0" layoutY="21.0" mnemonicParsing="false" onAction="#fermerConsole" prefHeight="25.0" prefWidth="81.0" style="-fx-background-radius: 45; -fx-border-radius: 45; -fx-background-color: #B64D85; border: grey;" text="Cancel" />
+            <Button fx:id="signUp" layoutX="166.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" style="-fx-background-radius: 45; -fx-border-radius: 45; -fx-background-color: white; -fx-border-color: black;" text="Sign Up" />
+            <Label layoutX="181.0" layoutY="329.0" prefHeight="17.0" prefWidth="151.0" text="-antoine de saint-exupéry">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="226.0" fitWidth="215.0" layoutX="96.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/LoginPage/quote.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
