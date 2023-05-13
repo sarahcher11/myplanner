@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="334.0" prefWidth="449.0" style="-fx-background-color: white; -fx-background-radius: 40; -fx-border-radius: 40;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TP.Controllers.PeriodeController">
+   <children>
+      <Label alignment="CENTER" layoutX="87.0" layoutY="78.0" prefHeight="17.0" prefWidth="276.0" text="Provide a start date and an end date">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <VBox layoutX="104.0" layoutY="127.0" prefHeight="80.0" prefWidth="242.0" spacing="25.0">
+         <children>
+            <DatePicker fx:id="datedebut" prefHeight="27.0" prefWidth="249.0" style="-fx-border-color: white; -fx-border-color: grey;" />
+            <DatePicker fx:id="datefin" prefHeight="27.0" prefWidth="248.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+         </children>
+      </VBox>
+      <Button fx:id="enter" layoutX="269.0" layoutY="286.0" mnemonicParsing="false" onAction="#specifierPeriode" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: #F8D1D0; -fx-background-radius: 15; -fx-border-radius: 15; -fx-font-weight: bold;" text="ENTER" />
+      <Button fx:id="skip" layoutX="87.0" layoutY="286.0" mnemonicParsing="false" onAction="#specifierPeriode" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: #F8D1D0; -fx-background-radius: 15; -fx-border-radius: 15; -fx-font-weight: bold;" text="SKIP" />
+   </children>
+</AnchorPane>

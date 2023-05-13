@@ -1,8 +1,4 @@
 package TP;
-
-import TP.EtatDeRealisation;
-
-import java.util.HashSet;
 import java.util.TreeMap;
 
 /**
@@ -23,6 +19,10 @@ public class Project {
      */
     private TreeMap<String,Tache> taches;
 
+
+    /**
+     *
+     */
     private EtatDeRealisation etatDeRealisation;
 
     public Project(String nomProjet, String description, TreeMap<String,Tache> taches, EtatDeRealisation etatDeRealisation) {

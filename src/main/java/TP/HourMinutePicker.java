@@ -12,7 +12,7 @@ public class HourMinutePicker extends HBox {
     private Spinner<Integer> minuteSpinner;
 
     public HourMinutePicker() {
-        hourSpinner = new Spinner<>(0, 12, 0);
+        hourSpinner = new Spinner<>(0, 23, 0);
         hourSpinner.setEditable(true);
         UnaryOperator<TextFormatter.Change> hourFilter = change -> {
             String text = change.getText();

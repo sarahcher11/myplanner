@@ -30,7 +30,7 @@ public class Periode {
      * @throws DateDebutException une exception qui sera déclenché si la date du début est antérieure a la date de fin
      */
     public Periode(LocalDate dateDebut, LocalDate dateFin)throws DateDebutException {
-        if(dateDebut.isBefore(LocalDate.now())) throw new DateDebutException(dateDebut);
+        if(dateDebut.isBefore(LocalDate.now()) || dateDebut.isAfter(dateFin) ) throw new DateDebutException(dateDebut);
         else {
             this.dateDebut = dateDebut;
             this.dateFin = dateFin;

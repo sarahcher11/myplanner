@@ -92,7 +92,7 @@ public class SignUpController {
         if(MyDesktopPlanner.trouverUtilisateur(username)==null)
         {
             try {
-              Parent root= FXMLLoader.load(this.getClass().getResource("../IntroduireTache.fxml"));
+              Parent root= FXMLLoader.load(this.getClass().getResource("../IntroducePeriode.fxml"));
               Scene scene=new Scene(root);
               Stage stage=new Stage();
               stage.setScene(scene);
