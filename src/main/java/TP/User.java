@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
 
-public class User implements Planification {
+public class User {
     private String pseudo;
     private Periode periode;
     private Set<Tache> taches;
@@ -72,9 +72,7 @@ public class User implements Planification {
         return pseudo;
     }
 
-    public Periode getPeriode() {
-        return periode;
-    }
+
 
     public Set<Tache> getTaches() {
         return taches;

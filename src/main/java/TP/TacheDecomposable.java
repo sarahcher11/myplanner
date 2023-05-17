@@ -34,6 +34,7 @@ public class TacheDecomposable extends Tache implements Decomposable {
                 String nomSousTache=this.nom+ (sousTaches.size()+1);
                 TacheSimple sousTache=new TacheSimple(nomSousTache,creneau.convertMinuteLocalTime(),priorite,dayOfDeadline,timeOfDeadline,categorie);
                 sousTaches.put(sousTache,creneau);
+                miseAjourDureeRestante(creneau);
                 return true;
             }
         }

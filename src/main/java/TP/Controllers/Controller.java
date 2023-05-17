@@ -82,18 +82,9 @@ public class Controller {
 
                           Alert alert=new Alert(Alert.AlertType.ERROR,"Votre compte n'existe pas,Veuillez vous inscrire");
                           alert.showAndWait();
-
                   }
-
-
               }
-
-
-
           }
-
-
       });
-
   }
 }

@@ -22,10 +22,8 @@ public class DatePickerExemple extends Application {
             LocalDate selectedDate = datePicker.getValue();
             System.out.println("Selected date: " + selectedDate);
         });
-
         VBox vbox = new VBox(datePicker, button); // add the date picker and button to the VBox container
         vbox.setPrefHeight(200);
-
         Scene scene = new Scene(vbox, 400, 400); // create a new scene with the VBox container
         stage.setScene(scene); // set the scene on the stage
         stage.show(); // show the stage

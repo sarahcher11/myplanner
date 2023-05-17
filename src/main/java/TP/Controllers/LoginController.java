@@ -61,10 +61,7 @@ public class LoginController {
                e.printStackTrace();
            }
        });
-
    }
-
-
     void showAlert(String message) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);

@@ -60,6 +60,29 @@ public class Journee implements Comparable<Journee>{
          }
          return creneauxLibres;
      }
+
+
+    public ArrayList<Creneau> recupCreneauxLibresCompa(Tache tache)
+    {
+        ArrayList<Creneau> creneauxLibres=new ArrayList<Creneau>();
+        for(Creneau creneau: this.creneaux)
+        {
+
+            if(creneau.getTache()==null)
+            {
+                if( (tache instanceof TacheSimple) &&(creneau.deadlineRespectee(tache)) && (creneau.compatibiliteDuree(tache)!=0))
+                {
+                    creneauxLibres.add(creneau);
+                }
+                if((tache instanceof TacheDecomposable))
+                {
+                    creneauxLibres.add(creneau);
+                }
+
+            }
+        }
+        return creneauxLibres;
+    }
     public LocalDate getDateDuJour() {
         return dateDuJour;
     }
