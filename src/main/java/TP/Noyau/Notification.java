@@ -1,4 +1,4 @@
-package TP;
+package TP.Noyau;
 
 public class Notification {
 }
