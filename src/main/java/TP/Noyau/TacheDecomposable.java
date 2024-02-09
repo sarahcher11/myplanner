@@ -1,46 +1,57 @@
-package TP;
+package TP.Noyau;
 
-import TP.*;
-
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class TacheDecomposable extends Tache implements Decomposable {
+public class TacheDecomposable extends Tache implements  Serializable {
 
-    private long dureeRestante=dureeEnMinute();
-    TreeMap<TacheSimple, Creneau> sousTaches;
+    private long dureeRestante;
+    Map<TacheSimple, Creneau> sousTaches;
 
     private EtatDeRealisation etatDeRealisation;
+
+    public TacheDecomposable(String nom,LocalTime duree,LocalDate dayOfDeadline,LocalTime heureOfDeadline)
+    {
+        this.nom=nom;
+        this.duree=duree;
+        this.dayOfDeadline=dayOfDeadline;
+        this.timeOfDeadline=heureOfDeadline;
+        this.sousTaches=new TreeMap<>();
+    }
 
     public TacheDecomposable(String nom, LocalTime duree, Priorite priorite, LocalDate dayOfDeadline, LocalTime heureOfDeadline, Categorie categorie) {
         super(nom, duree, priorite,dayOfDeadline,heureOfDeadline, categorie);
         TreeMap<TacheSimple, Creneau> sousTaches=new TreeMap<TacheSimple, Creneau>();
         this.sousTaches = sousTaches;
     }
-    private void miseAjourDureeRestante(Creneau creneau)
+    public void miseAjourDureeRestante(Creneau creneau)
     {
         dureeRestante=dureeRestante- creneau.calculerDureeCreneau();
     }
-    public boolean decomposer(Object object)
-    {
-        if(object instanceof Creneau)
-        {
-            Creneau creneau=(Creneau) object;
 
-            if(dureeRestante>0)
-            {
-                String nomSousTache=this.nom+ (sousTaches.size()+1);
-                TacheSimple sousTache=new TacheSimple(nomSousTache,creneau.convertMinuteLocalTime(),priorite,dayOfDeadline,timeOfDeadline,categorie);
-                sousTaches.put(sousTache,creneau);
-                miseAjourDureeRestante(creneau);
-                return true;
-            }
+
+
+    public TacheSimple decomposer(Creneau creneau) {
+        if (dureeRestante > 0) {
+            String nomSousTache = this.nom + (sousTaches.size() + 1);
+            System.out.println("-------------");
+            System.out.println(nomSousTache);
+            System.out.println(creneau.getHeureDebut());
+            TacheSimple sousTache = new TacheSimple(nomSousTache, creneau.convertMinuteLocalTime(), priorite, dayOfDeadline, timeOfDeadline, categorie);
+            System.out.println(creneau.getHeureDebut());
+            this.sousTaches.put(sousTache, creneau);
+            creneau.decomposer(sousTache);
+            sousTache.setCreneau(creneau);
+            creneau.setTache(sousTache);
+            miseAjourDureeRestante(creneau);
+            System.out.println(dureeRestante);
+            return sousTache;
         }
-
-        return false;
-
+        return null;
     }
 
 
@@ -68,8 +79,10 @@ public class TacheDecomposable extends Tache implements Decomposable {
         {
             this.etatDeRealisation=EtatDeRealisation.inProgress;
         }
+        super.setEtatDeRealisation(this.etatDeRealisation);
+
     }
-    public TreeMap<TacheSimple, Creneau> getSousTaches() {
+    public Map<TacheSimple, Creneau> getSousTaches() {
         return sousTaches;
     }
     public void ajouterTache(TacheSimple soustache,Creneau creneau)
@@ -78,6 +91,10 @@ public class TacheDecomposable extends Tache implements Decomposable {
         {
             sousTaches.put(soustache,creneau);
         }
+    }
+
+    public void setDureeRestante(long dureeRestante) {
+        this.dureeRestante = dureeRestante;
     }
 
     public long getDureeRestante() {
