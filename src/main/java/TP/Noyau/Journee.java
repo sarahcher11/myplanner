@@ -1,12 +1,10 @@
-package TP;
+package TP.Noyau;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.SortedSet;
+import java.util.*;
 
-public class Journee implements Comparable<Journee>{
+public class Journee implements Comparable<Journee>, Serializable {
 
     // dans journee on choisi un creneau libre, ce creneau sera affecté pour tache precise
     // cette tache sera ajoutée dans taches(de la même journee) et le créneau sera enlevée de creneaux Libres
@@ -24,14 +22,24 @@ public class Journee implements Comparable<Journee>{
      * L'ensemble des tâches à réaliser
      */
 
-    private HashMap<String,Tache> taches;
-    /**
-     * Le nombre de tâches réalisées pour cette journée
-     */
-    private int nbTacheRealisees;
+    private HashMap<String, Tache> taches;
+
+
+   private boolean felicitation;
+
+
+
+    public void affecterTache(Tache tache, Creneau creneau) {
+        creneau.setTache(tache); // Assign the task to the creneau
+        creneau.decomposer(tache);
+        taches.put(tache.getNom(), tache); // Add the task to the map of tasks for this journée
+    }
+
+
     public Journee(LocalDate dateDuJour, SortedSet<Creneau> creneaux) {
         this.dateDuJour = dateDuJour;
         this.creneaux = creneaux;
+         taches=new HashMap<>();
     }
      public void supprimerCreneau(Creneau creneau)
      {
@@ -42,10 +50,9 @@ public class Journee implements Comparable<Journee>{
      }
      public void ajouterCreneau(Creneau creneau)
      {
-         if (!creneaux.contains(creneau))
-         {
+
              creneaux.add(creneau);
-         }
+
      }
      public ArrayList<Creneau> recupCreneauxLibres()
      {
@@ -64,7 +71,7 @@ public class Journee implements Comparable<Journee>{
 
     public ArrayList<Creneau> recupCreneauxLibresCompa(Tache tache)
     {
-        ArrayList<Creneau> creneauxLibres=new ArrayList<Creneau>();
+        ArrayList<Creneau> creneauxLibres=new ArrayList<>();
         for(Creneau creneau: this.creneaux)
         {
 
@@ -74,7 +81,7 @@ public class Journee implements Comparable<Journee>{
                 {
                     creneauxLibres.add(creneau);
                 }
-                if((tache instanceof TacheDecomposable))
+                if((tache instanceof TacheDecomposable) && creneau.deadlineRespectee(tache))
                 {
                     creneauxLibres.add(creneau);
                 }
@@ -83,12 +90,32 @@ public class Journee implements Comparable<Journee>{
         }
         return creneauxLibres;
     }
+
+    public Creneau rechercherCreneau(String creneau)
+    {
+        for(Creneau creneau1 :this.creneaux)
+        {
+            if(creneau1.toString().equals(creneau))
+            {
+                return creneau1;
+            }
+        }
+        return null;
+    }
     public LocalDate getDateDuJour() {
         return dateDuJour;
     }
 
     public SortedSet<Creneau> getCreneaux() {
         return creneaux;
+    }
+
+    public Creneau getCreneau(Creneau creneau) {
+        if (creneaux.contains(creneau)) {
+            return creneau;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -104,10 +131,6 @@ public class Journee implements Comparable<Journee>{
     }
 
 
-
-
-
-
     public void afficherCreneaux()
     {
         for(Creneau creneau: creneaux)
@@ -117,17 +140,47 @@ public class Journee implements Comparable<Journee>{
     }
 
 
-    public void setNbTacheRealisees(int nbTacheRealisees) {
-        this.nbTacheRealisees = nbTacheRealisees;
+
+
+    public void setTaches(HashMap<String, Tache> taches) {
+        this.taches = taches;
     }
 
-    public int getNbTacheRealisees() {
-        return nbTacheRealisees;
+    public HashMap<String, Tache> getTaches() {
+        return taches;
     }
 
 
+
+    public int nbTachesRealisees()
+    {
+        int i=0;
+        for(Creneau creneau: creneaux)
+        {
+            if (creneau.getTache()!=null)
+            {
+                if(creneau.getTache().getEtatDeRealisation().equals(EtatDeRealisation.completed))
+                {
+                    i++;
+                }
+            }
+        }
+        return i;
+    }
+
+    @Override
+    public String toString()
+    {
+        return dateDuJour.toString();
+    }
     @Override
     public int compareTo(Journee o) {
         return this.dateDuJour.compareTo(o.dateDuJour);
+    }
+    public boolean isFelicitation() {
+        return felicitation;}
+
+    public void setFelicitation(boolean felicitation) {
+        this.felicitation = felicitation;
     }
 }
