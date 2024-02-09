@@ -1,14 +1,16 @@
-package TP;
+package TP.Noyau;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Objects;
+
 
 /**
  * Cette classe permet de créer une catégorie de taches selon le désir de l'utilisateur
  * On peut avoir plusieurs catégories de taches
  * chaque catégorie est caractérisé par sa couleur
  */
-public class Categorie {
+public class Categorie implements Serializable {
 
     /**
      * Le nom de la catégorie
@@ -21,6 +23,12 @@ public class Categorie {
 
     public Categorie(String nomCategorie) {
         this.nomCategorie = nomCategorie;
+    }
+
+
+    public Categorie(String nomCategorie, Color couleur) {
+        this.nomCategorie = nomCategorie;
+        this.couleur = couleur;
     }
 
     @Override
