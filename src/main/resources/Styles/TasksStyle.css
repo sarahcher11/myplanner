@@ -1,0 +1,15 @@
+
+
+.buttonimage2{
+-fx-max-width:75px;
+-fx-max-height:75px;
+-fx-background-size: contain;
+-fx-background-repeat: no-repeat;
+-fx-background-position: center;
+-fx-border-color: transparent;
+-fx-background-color: transparent;
+-fx-cursor:hand;
+}
+#8{
+-fx-background-image: url('../images/Taches/add.png');
+}

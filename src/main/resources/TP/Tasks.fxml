@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1280.0" stylesheets="@../Styles/TasksStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TP.Controllers.TasksController">
+   <children>
+      <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="700.0" prefWidth="1280.0" style="-fx-background-radius: 35; -fx-border-radius: 35; -fx-border-color: grey; -fx-background-color: white;" AnchorPane.leftAnchor="80.0">
+         <children>
+            <Label layoutX="122.0" layoutY="54.0" text="Tasks" textFill="#001c44">
+               <font>
+                  <Font name="Calibri Bold" size="45.0" />
+               </font>
+            </Label>
+            <Button id="8" fx:id="add" layoutX="260.0" layoutY="49.0" maxHeight="63.0" maxWidth="72.0" mnemonicParsing="false" onAction="#ajouterTache" prefHeight="63.0" prefWidth="72.0" styleClass="buttonimage2" />
+            <VBox layoutX="79.0" layoutY="123.0" prefHeight="547.0" prefWidth="1049.0" style="-fx-background-color: white; -fx-border-color: grey;">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="552.0" prefWidth="1101.0">
+                     <content>
+                        <TableView fx:id="taskTable" prefHeight="545.0" prefWidth="1033.0">
+                          <columns>
+                            <TableColumn fx:id="taskNameColumn" prefWidth="142.0" text="Task name" />
+                            <TableColumn fx:id="deadlineColumn" prefWidth="159.0" text="Deadline" />
+                              <TableColumn fx:id="categoryColumn" prefWidth="140.0" text="Category" />
+                              <TableColumn fx:id="completionStatusColumn" prefWidth="140.0" text="Realisation" />
+                              <TableColumn fx:id="dateCreneau" prefWidth="161.0" text="Slot time" />
+                              <TableColumn fx:id="priorityTask" prefWidth="140.0" text="Priority" />
+                              <TableColumn fx:id="modifierEtatColumn" prefWidth="140.0" text="ChangeSatus">
+                                      </TableColumn>
+                          </columns>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
