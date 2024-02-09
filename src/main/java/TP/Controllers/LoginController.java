@@ -1,31 +1,24 @@
 package TP.Controllers;
 
-import TP.App;
-import TP.User;
-import TP.MyDesktopPlanner;
+import TP.Noyau.User;
+import TP.Noyau.MyDesktopPlanner;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -41,7 +34,9 @@ public class LoginController {
    @FXML
    private Button loginbutton;
 
+    private static MyDesktopPlanner desktopPlanner=new MyDesktopPlanner();
 
+    private static User user;
 
    @FXML
     public void CreateNewAccount()
@@ -85,41 +80,54 @@ public class LoginController {
         timeline.play();
     }
 
-    public void seConnecter()
-    {
-        loginbutton.setOnMouseClicked(mouseEvent->{
-            if (info.getText().isEmpty())
-            {
+    public void seConnecter() {
+        loginbutton.setOnMouseClicked(mouseEvent -> {
+            if (info.getText().isEmpty()) {
                 showAlert("Le pseudo est obligatoire pour s'authentifier");
-            }
-            else
-            {
-                String username=info.getText();
+            } else {
+                String username = info.getText();
                 System.out.println(username);
-                if(username!=null)
-                {
-                    User user= MyDesktopPlanner.trouverUtilisateur(username);
-                    System.out.println(MyDesktopPlanner.getUsers().size());
-                    if(user!=null)
-                    {
-                        try {
-                            Parent root= FXMLLoader.load(this.getClass().getResource("../IntroduireTache.fxml"));
-                            Scene scene=new Scene(root);
-                            Stage stage=new Stage();
+                if (username != null) {
+                    try {
+                        // Deserialize MyDesktopPlanner object from the file
+                        user = desktopPlanner.trouverUtilisateur(username);
+                        if (user != null) {
+                            Parent root = FXMLLoader.load(this.getClass().getResource("../SideBar.fxml"));
+                            Scene scene = new Scene(root);
+                            Stage stage = new Stage();
                             stage.setScene(scene);
                             stage.show();
-                            Stage ancienneStage=(Stage) loginbutton.getScene().getWindow();
+                            stage.setOnCloseRequest(event -> {
+                                // Handle the close request here
+                                desktopPlanner.serializeDesktopPlanner();
+                            });
+                            Stage ancienneStage = (Stage) loginbutton.getScene().getWindow();
                             ancienneStage.close();
-
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                        } else {
+                            showAlert("Votre compte n'existe pas, Veuillez vous inscrire");
                         }
-                    }
-                    else {
-                        showAlert("Votre compte n'existe pas,Veuillez vous inscrire");
+
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 }
             }
         });
+    }
+
+    public static MyDesktopPlanner getDesktopPlanner() {
+        return desktopPlanner;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setDesktopPlanner(MyDesktopPlanner desktopPlanner) {
+        LoginController.desktopPlanner = desktopPlanner;
+    }
+
+    public static void setUser(User user) {
+        LoginController.user = user;
     }
 }
