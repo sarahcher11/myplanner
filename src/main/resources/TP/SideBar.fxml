@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" stylesheets="@../Styles/StyleHome.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TP.Controllers.SideBarController">
+   <children>
+      <AnchorPane fx:id="parent" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane prefHeight="700.0" prefWidth="1287.0" AnchorPane.leftAnchor="0.0" />
+            <VBox fx:id="side" alignment="CENTER" prefHeight="649.0" prefWidth="45.0" spacing="30.0" style="-fx-background-color: #001C44; -fx-background-radius: 30; -fx-border-radius: 30;" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="26.0">
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+               <children>
+                  <Button id="1" fx:id="calendrier" maxHeight="39.0" maxWidth="41.0" mnemonicParsing="false" onAction="#calendarPage" prefHeight="13.0" prefWidth="14.0" styleClass="buttonimage" />
+                  <Button id="4" fx:id="statistique" maxWidth="39.0" mnemonicParsing="false" onAction="#statistiquePage" prefHeight="12.0" prefWidth="12.0" styleClass="buttonimage" />
+                  <Button id="5" fx:id="tache" maxWidth="37.0" mnemonicParsing="false" onAction="#tasksPage" prefHeight="18.0" prefWidth="16.0" styleClass="buttonimage" />
+                  <Button id="2" fx:id="projet" maxWidth="38.0" mnemonicParsing="false" onAction="#projectsPage" prefHeight="19.0" prefWidth="0.0" styleClass="buttonimage" />
+                  <Button disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="buttonimage" />
+                  <Button disable="true" layoutX="30.0" layoutY="360.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="buttonimage" />
+                  <Button disable="true" layoutX="30.0" layoutY="327.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="buttonimage" />
+                  <Button id="6" fx:id="compte" mnemonicParsing="false" onAction="#profilPage" prefHeight="0.0" prefWidth="7.0" styleClass="buttonimage" />
+                  <Button id="3" fx:id="logout" maxHeight="46.0" maxWidth="45.0" mnemonicParsing="false" onAction="#logoutPage" prefHeight="9.0" prefWidth="9.0" styleClass="buttonimage" />
+               </children>
+               <effect>
+                  <DropShadow radius="6.335" width="6.34" />
+               </effect>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
