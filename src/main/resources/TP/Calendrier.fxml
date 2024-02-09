@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TP.Controllers.CalendrierController">
+   <AnchorPane prefHeight="700.0" prefWidth="1280.0" style="-fx-background-radius: 35; -fx-border-radius: 35; -fx-border-color: grey; -fx-background-color: white;" stylesheets="@../Styles/StyleHome.css" AnchorPane.leftAnchor="80.0">
+      <children>
+         <HBox layoutX="28.0" layoutY="573.0" prefHeight="29.0" prefWidth="217.0" spacing="5.0">
+            <children>
+               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="121.0" style="-fx-font-weight: bold; -fx-font-family: calibri;" text="available time slot">
+                  <padding>
+                     <Insets right="5.0" top="6.0" />
+                  </padding>
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Label>
+               <Label fx:id="creneauLibre" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="74.0" style="-fx-border-color: grey; -fx-font-family: calibri; -fx-font-size: 22; -fx-font-weight: bold; -fx-alignment: center;">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding>
+                  <effect>
+                     <DropShadow>
+                        <color>
+                           <Color red="0.5176470875740051" green="0.5098039507865906" blue="1.0" />
+                        </color>
+                     </DropShadow>
+                  </effect>
+               </Label>
+            </children>
+         </HBox>
+         <HBox layoutX="449.0" layoutY="97.0" prefHeight="26.0" prefWidth="88.0" spacing="35.0">
+            <children>
+                  <Button mnemonicParsing="false" onAction="#backOneMonth" style="-fx-background-color: #001C44; -fx-background-radius: 35;" text="&lt;" textFill="WHITE">
+                  <opaqueInsets>
+                     <Insets top="30.0" />
+                  </opaqueInsets>
+               </Button>
+                  <Button mnemonicParsing="false" onAction="#forwardOneMonth" style="-fx-background-color: #001C44; -fx-background-radius: 35;" text="&gt;" textFill="WHITE">
+                  <opaqueInsets>
+                     <Insets top="30.0" />
+                  </opaqueInsets>
+               </Button>
+            </children>
+         </HBox>
+         <HBox layoutX="28.0" layoutY="97.0" prefHeight="9.0" prefWidth="200.0">
+            <children>
+                  <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
+                      <font>
+                          <Font name="Calibri" size="26.0" />
+                      </font>
+                  </Text>
+                  <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="####" wrappingWidth="64.828125">
+                      <font>
+                          <Font name="Calibri Bold" size="26.0" />
+                      </font>
+                  <HBox.margin>
+                     <Insets left="100.0" />
+                  </HBox.margin>
+                  </Text>
+            </children>
+         </HBox>
+          <HBox alignment="CENTER" layoutX="20.0" layoutY="48.0" prefHeight="29.0" prefWidth="517.0" spacing="60.0" style="-fx-background-radius: 35; -fx-border-radius: 35; -fx-background-color: #F8DAD0;">
+              <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Su" textAlignment="CENTER" />
+                  <Text layoutX="213.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mo" textAlignment="CENTER" />
+                  <Text layoutX="222.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tu" textAlignment="CENTER" />
+                  <Text layoutX="232.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We" textAlignment="CENTER" />
+                  <Text layoutX="241.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Th" textAlignment="CENTER" />
+                  <Text layoutX="251.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fr" textAlignment="CENTER" />
+                  <Text layoutX="266.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sa" textAlignment="CENTER" />
+              </children>
+              <padding>
+                  <Insets right="9.0" />
+              </padding>
+          </HBox>
+          <FlowPane fx:id="calendar" hgap="10.0" layoutX="20.0" layoutY="142.0" prefHeight="418.0" prefWidth="525.0" vgap="5.0" />
+         <HBox layoutX="276.0" layoutY="573.0" prefHeight="29.0" prefWidth="217.0" spacing="5.0">
+            <children>
+               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="121.0" style="-fx-font-weight: bold; -fx-font-family: calibri;" text="Tasks">
+                  <padding>
+                     <Insets right="5.0" top="6.0" />
+                  </padding>
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Label>
+               <Label fx:id="tasks" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="74.0" style="-fx-border-color: grey; -fx-alignment: center; -fx-font-family: calibri; -fx-font-size: 22; -fx-font-weight: bold;">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding>
+                  <effect>
+                     <DropShadow>
+                        <color>
+                           <Color red="0.5176470875740051" green="0.5098039507865906" blue="1.0" />
+                        </color>
+                     </DropShadow>
+                  </effect>
+               </Label>
+            </children>
+         </HBox>
+         <HBox layoutX="736.0" layoutY="48.0" prefHeight="41.0" prefWidth="362.0" spacing="10.0">
+            <children>
+               <Button id="8" fx:id="addButton" mnemonicParsing="false" onAction="#buttonAjouter" prefHeight="31.0" prefWidth="46.0" styleClass="buttonimage2">
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+               </Button>
+               <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: #F8DAD0; -fx-background-radius: 15; -fx-border-radius: 15;" text="Add new category">
+                  <padding>
+                     <Insets left="15.0" />
+                  </padding>
+                  <HBox.margin>
+                     <Insets top="5.0" />
+                  </HBox.margin>
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font>
+               </Label>
+            </children>
+         </HBox>
+         <VBox layoutX="736.0" layoutY="97.0" prefHeight="308.0" prefWidth="433.0" style="-fx-background-color: grey;">
+            <children>
+               <ScrollPane fx:id="scrol2" hbarPolicy="NEVER" prefHeight="309.0" prefWidth="433.0" style="-fx-border-color: grey;">
+                  <content>
+                     <VBox fx:id="lesCategories" prefHeight="311.0" prefWidth="432.0" spacing="10.0">
+                        <padding>
+                           <Insets left="10.0" top="10.0" />
+                        </padding>
+                     </VBox>
+                  </content>
+               </ScrollPane>
+            </children>
+         </VBox>
+         <Pane fx:id="paneTache" layoutX="385.0" layoutY="48.0" prefHeight="623.0" prefWidth="362.0" style="-fx-background-color: F2F2F2; -fx-border-color: grey; -fx-border-radius: 35; -fx-background-radius: 35;">
+            <children>
+               <Label layoutX="36.0" layoutY="36.0" prefHeight="26.0" prefWidth="148.0" text="Add a new task">
+                  <font>
+                     <Font name="Calibri Bold" size="22.0" />
+                  </font>
+               </Label>
+               <TextField fx:id="nameTask" layoutX="113.0" layoutY="96.0" prefHeight="41.0" prefWidth="217.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+               <ChoiceBox fx:id="priorityChoice" layoutX="113.0" layoutY="394.0" prefHeight="41.0" prefWidth="217.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+               <ChoiceBox fx:id="categoryChoice" layoutX="112.0" layoutY="462.0" prefHeight="41.0" prefWidth="217.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+               <JFXCheckBox fx:id="blockedCheck" layoutX="81.0" layoutY="522.0" prefHeight="29.0" prefWidth="237.0" text="Block the slot" />
+               <Button fx:id="ajouterTask" layoutX="119.0" layoutY="561.0" mnemonicParsing="false" onAction="#ajouterTaskButton" prefHeight="41.0" prefWidth="114.0" style="-fx-background-color: #F8DAD0; -fx-background-radius: 15; -fx-border-radius: 15;" text="Add" />
+               <Label layoutX="23.0" layoutY="96.0" prefHeight="41.0" prefWidth="65.0" text="Name">
+                  <font>
+                     <Font name="Calibri Bold" size="20.0" />
+                  </font>
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding>
+               </Label>
+               <Label layoutX="23.0" layoutY="171.0" prefHeight="41.0" prefWidth="88.0" text="Duration">
+                  <font>
+                     <Font name="Calibri Bold" size="20.0" />
+                  </font>
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding>
+               </Label>
+               <Label layoutX="19.0" layoutY="394.0" prefHeight="41.0" prefWidth="74.0" text="Priority">
+                  <font>
+                     <Font name="Calibri Bold" size="20.0" />
+                  </font>
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding>
+               </Label>
+               <Label layoutX="15.0" layoutY="462.0" prefHeight="41.0" prefWidth="81.0" text="Category">
+                  <font>
+                     <Font name="Calibri Bold" size="20.0" />
+                  </font>
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding>
+               </Label>
+               <Button id="7" fx:id="exitButton" layoutX="308.0" layoutY="22.0" maxHeight="41.0" maxWidth="52.0" mnemonicParsing="false" onAction="#fermerTache" prefHeight="41.0" prefWidth="52.0" />
+               <Label layoutX="147.0" layoutY="154.0" text="Hour">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="259.0" layoutY="154.0" text="Minute">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+               <DatePicker fx:id="deadlinePicker" layoutX="112.0" layoutY="256.0" prefHeight="41.0" prefWidth="217.0" promptText="deadline" style="-fx-background-color: white; -fx-border-color: grey;" />
+               <Label layoutX="23.0" layoutY="256.0" prefHeight="41.0" prefWidth="88.0" text="Date">
+                  <font>
+                     <Font name="Calibri Bold" size="20.0" />
+                  </font>
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding>
+               </Label>
+               <Label layoutX="259.0" layoutY="303.0" text="Minute">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="147.0" layoutY="303.0" text="Hour">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="23.0" layoutY="322.0" prefHeight="41.0" prefWidth="52.0" text="At ">
+                  <font>
+                     <Font name="Calibri Bold" size="20.0" />
+                  </font>
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding>
+               </Label>
+               <TextField fx:id="hourPicker" layoutX="113.0" layoutY="171.0" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+               <TextField fx:id="minutePicker" layoutX="231.0" layoutY="171.0" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+               <TextField fx:id="deadminutePicker" layoutX="231.0" layoutY="322.0" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+               <TextField fx:id="deadhourPicker" layoutX="113.0" layoutY="322.0" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+            </children>
+         </Pane>
+         <Label fx:id="uneTache" layoutX="734.0" layoutY="438.0" prefHeight="59.0" prefWidth="433.0" style="-fx-border-color: grey; -fx-background-radius: 15; -fx-border-radius: 15; -fx-font-family: CALIBRI; -fx-font-weight: BOLD; -fx-font-size: 22; -fx-alignment: center; -fx-background-color: #001C44;" text="Planify  task automaticly" textFill="WHITE" />
+         <Button id="8" fx:id="newTache" layoutX="745.0" layoutY="443.0" maxWidth="408.0" mnemonicParsing="false" onAction="#planifierAutomatUneTache" prefHeight="49.0" prefWidth="65.0" styleClass="buttonimage2" stylesheets="@../Styles/TasksStyle.css" />
+         <Label fx:id="groupeTache" layoutX="736.0" layoutY="531.0" prefHeight="59.0" prefWidth="433.0" style="-fx-border-color: grey; -fx-background-radius: 15; -fx-border-radius: 15; -fx-font-family: CALIBRI; -fx-font-weight: BOLD; -fx-font-size: 22; -fx-alignment: center; -fx-background-color: #001C44;" text="Planify  set of tasks automaticly" textFill="WHITE" />
+         <Button id="8" fx:id="planifierEnsemble" layoutX="745.0" layoutY="536.0" maxWidth="408.0" mnemonicParsing="false" onAction="#planifierAutomatDesTaches" prefHeight="49.0" prefWidth="65.0" styleClass="buttonimage2" stylesheets="@../Styles/TasksStyle.css" />
+         <Button fx:id="modifiermin" layoutX="731.0" layoutY="618.0" mnemonicParsing="false" onAction="#afficherStage2" prefHeight="25.0" prefWidth="433.0" text="Modifier nombre de tache minimal" />
+      </children>
+   </AnchorPane>
+
+</AnchorPane>
