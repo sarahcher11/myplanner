@@ -1,4 +1,4 @@
-package TP;
+package TP.Noyau;
 
 import java.io.Serializable;
 import java.time.Duration;
@@ -14,26 +14,20 @@ public class Creneau implements Decomposable,Comparable<Creneau>, Serializable {
      */
     private LocalTime heureFin;
     /**
-     * La durée minimal du créneau utilisé pour affecter une tâche
-     * Lorsque on affecte une tache à un créneau,
-     * et que la durée restante du créneau est supérieure à la durée minimale donc ce créneau sera décomposé
-     */
-    private long dureeMin;
-    /**
      * La jour de ce créneau libre
      */
     private Tache tache;
 
-
     private Journee journee;
+
+    private boolean blocked;
     /**
      * Cette methode est le constructeur du créneau
      * Elle sert à instancier un objet de type crénau en initialisant ses attribut
      * @param heureDebut l'heure début de ce créneau
      * @param heureFin l'heure de fin de ce créneau
-     * @param dureeMin la durée minimal pour que ce créneau puisse être décomposé
      */
-    public Creneau(LocalTime heureDebut, LocalTime heureFin, long dureeMin) throws HeureDebutException {
+    public Creneau(LocalTime heureDebut, LocalTime heureFin) throws HeureDebutException {
         if(heureDebut.isAfter(heureFin))
         {
           throw new HeureDebutException();
@@ -41,7 +35,7 @@ public class Creneau implements Decomposable,Comparable<Creneau>, Serializable {
         else{
             this.heureDebut = heureDebut;
             this.heureFin = heureFin;
-            this.dureeMin = dureeMin;
+            this.blocked=false;
         }
 
     }
@@ -77,7 +71,6 @@ public class Creneau implements Decomposable,Comparable<Creneau>, Serializable {
             {
                 n=2;
             }
-
         }
         return n;
     }
@@ -103,14 +96,15 @@ public class Creneau implements Decomposable,Comparable<Creneau>, Serializable {
     public boolean decomposer(Object object)
     {
         Tache tache=(Tache) object;
-        if(compatibiliteDuree(tache)==1 && dureeRestante(tache)>=dureeMin)
+        if(compatibiliteDuree(tache)==1 && dureeRestante(tache)>= User.getDureeMin())
         {
             try{
                 this.tache=tache;
-                Creneau newCreneau=new Creneau(this.heureDebut.plusMinutes(tache.dureeEnMinute()),this.heureFin,this.dureeMin);
+                Creneau newCreneau=new Creneau(this.heureDebut.plusMinutes(tache.dureeEnMinute()),this.heureFin);
                 this.heureFin=this.heureDebut.plusMinutes(tache.dureeEnMinute());
+                newCreneau.setJournee(this.journee);
                 System.out.println("Le nouveau creneau cree ");
-                newCreneau.toString();
+                System.out.println(newCreneau);
                 journee.ajouterCreneau(newCreneau);
                 return true;
             }
@@ -149,16 +143,26 @@ public class Creneau implements Decomposable,Comparable<Creneau>, Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Creneau creneau)) return false;
-        return heureDebut.equals(creneau.heureDebut) && heureFin.equals(creneau.heureFin);
+        return heureDebut.equals(((Creneau) o).getHeureDebut()) && heureFin.equals(((Creneau) o).heureFin) && this.journee.getDateDuJour().equals(((Creneau) o).getJournee().getDateDuJour());
     }
 
 
     public boolean deadlineRespectee(Tache tache)
     {
 
-        if(  (this.journee.getDateDuJour().isAfter(tache.getDayOfDeadline())
-        && (this.heureDebut.isBefore(tache.getTimeOfDeadline()))))
+        if(  ((this.journee.getDateDuJour().isBefore(tache.getDayOfDeadline()) || journee.getCreneaux().equals(tache.getDayOfDeadline()))))
         {
+            if(journee.getCreneaux().equals(tache.getDayOfDeadline()))
+            {
+                if(this.heureDebut.isBefore(tache.getTimeOfDeadline()))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
             return true;
         }
         return false;
@@ -166,20 +170,21 @@ public class Creneau implements Decomposable,Comparable<Creneau>, Serializable {
 
     @Override
     public String toString() {
-        return "TP.Creneau{" +
-                "heureDebut=" + heureDebut +
-                ", heureFin=" + heureFin +
-                '}';
+        return  heureDebut +
+                " - " + heureFin;
     }
 
 
-    public void tacheRealisee()
+
+
+
+    public boolean egalEnTermeDuree(Tache tache)
     {
-        if(this.tache!=null)
+        if(this.calculerDureeCreneau()==tache.dureeEnMinute())
         {
-            this.tache.setEtatDeRealisation(EtatDeRealisation.completed);
-            this.journee.setNbTacheRealisees(this.journee.getNbTacheRealisees()+1);
+            return true;
         }
+        return false;
     }
 
 
@@ -201,10 +206,6 @@ public class Creneau implements Decomposable,Comparable<Creneau>, Serializable {
         this.heureFin = heureFin;
     }
 
-    public long getDureeMin() {
-        return dureeMin;
-    }
-
     public Tache getTache() {
         return tache;
     }
@@ -213,8 +214,19 @@ public class Creneau implements Decomposable,Comparable<Creneau>, Serializable {
         this.tache = tache;
     }
 
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
 
     public void setJournee(Journee journee) {
         this.journee = journee;
+    }
+
+    public Journee getJournee() {
+        return journee;
     }
 }
