@@ -1,26 +1,30 @@
 package TP.Controllers;
-import TP.Creneau;
-import TP.DateDebutException;
-import TP.Journee;
-import TP.Periode;
+import TP.Noyau.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.function.UnaryOperator;
 public class PeriodeController {
 
@@ -45,6 +49,9 @@ public class PeriodeController {
     @FXML
     private Button next;
 
+    @FXML
+    private Button skip;
+
 
     @FXML
     private Spinner hour1;
@@ -61,9 +68,11 @@ public class PeriodeController {
 
     @FXML
     private Button cancelCreneau;
-    private Periode periode;
+    private static Periode periode;
 
     private ArrayList<Journee> journees;
+
+    private static Creneau lastSlot;
 
 
     void showAlert(String message) {
@@ -109,13 +118,32 @@ public class PeriodeController {
                     LocalDate endDay=datefin.getValue();
                     try {
                         periode=new Periode(day,endDay);
-                        Parent root= FXMLLoader.load(this.getClass().getResource("../TacheParJour.fxml"));
-                        date=(Label) root.lookup("#date");
-                        date.setText(periode.getDateDebut().toString());
-                        Scene scene=new Scene(root);
-                        Stage stage=(Stage) enter.getScene().getWindow();
-                        stage.setScene(scene);
+                        Planning planning=new Planning(new HashMap<>(),periode);
+                        SortedSet<Creneau> sortedCreneau=new TreeSet<>();
+                       /* sortedCreneau.add(new Creneau(LocalTime.of(12,00),LocalTime.of(14,00)));
+                        sortedCreneau.add(new Creneau(LocalTime.of(14,00),LocalTime.of(16,00)));
+                        sortedCreneau.add(new Creneau(LocalTime.of(16,00),LocalTime.of(17,00)));
+                        sortedCreneau.add(new Creneau(LocalTime.of(17,00),LocalTime.of(18,00)));*/
+                        planning.initialiserJournees(sortedCreneau);
+                        LoginController.getUser().setPlanningCourant(planning);
+                        LoginController.getUser().getLesPlannings().add(planning);
+                        Parent root2=FXMLLoader.load(getClass().getResource("../SideBar.fxml"));
+                        Stage stage=(Stage)enter.getScene().getWindow();
+                        Scene scene2=new Scene(root2);
+                        stage.setScene(scene2);
+                        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+                        double centerX = screenBounds.getMinX() + screenBounds.getWidth() / 2;
+                        double centerY = screenBounds.getMinY() + screenBounds.getHeight() / 2;
+                        double stageWidth = stage.getWidth();
+                        double stageHeight = stage.getHeight();
+                        stage.setX(centerX - stageWidth / 2);
+                        stage.setY(centerY - stageHeight / 2);
+                        stage.setOnCloseRequest(event -> {
+                            // Handle the close request here
+                            LoginController.getDesktopPlanner().serializeDesktopPlanner();
+                        });
                         stage.show();
+
                     } catch (DateDebutException e) {
                         showAlert("You can not choose this dates");
                     } catch (IOException e) {
@@ -132,6 +160,7 @@ public class PeriodeController {
     @FXML
     public void ajouterCreneau()
     {
+
 
         addnew.setOnMouseClicked(MouseEvent->{
 
@@ -220,14 +249,28 @@ public class PeriodeController {
 
     }
 
+    public void skipButton()
+    {
+        skip.setOnMouseClicked(MouseEvent->{
+            Stage stage=(Stage) skip.getScene().getWindow();
+            stage.close();
+        });
+    }
 
 
+    public static Creneau getLastSlot() {
+        return lastSlot;
+    }
 
+    public static void setLastSlot(Creneau lastSlot) {
+        PeriodeController.lastSlot = lastSlot;
+    }
 
+    public static Periode getPeriode() {
+        return periode;
+    }
 
-
-
-
-
-
+    public static void setPeriode(Periode periode) {
+        PeriodeController.periode = periode;
+    }
 }
