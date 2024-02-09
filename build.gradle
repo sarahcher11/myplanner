@@ -8,6 +8,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.jfoenix:jfoenix:9.0.1'
 
 }
 
