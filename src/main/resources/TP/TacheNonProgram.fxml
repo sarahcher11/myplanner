@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="623.0" prefWidth="434.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TP.Controllers.TacheNonProgram">
+   <children>
+      <Pane fx:id="paneTache" prefHeight="623.0" prefWidth="524.0" style="-fx-background-color: F2F2F2; -fx-border-color: grey;">
+         <children>
+            <Label layoutX="36.0" layoutY="36.0" prefHeight="26.0" prefWidth="148.0" text="Add a new task">
+               <font>
+                  <Font name="Calibri Bold" size="22.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nameTask" layoutX="171.0" layoutY="96.0" prefHeight="41.0" prefWidth="217.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+            <ChoiceBox fx:id="priorityChoice" layoutX="171.0" layoutY="394.0" prefHeight="41.0" prefWidth="217.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+            <ChoiceBox fx:id="categoryChoice" layoutX="171.0" layoutY="462.0" prefHeight="41.0" prefWidth="217.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+            <Button fx:id="ajouterTask" layoutX="212.0" layoutY="568.0" mnemonicParsing="false" onAction="#ajouterTaskButton" prefHeight="41.0" prefWidth="114.0" style="-fx-background-color: #F8DAD0; -fx-background-radius: 15; -fx-border-radius: 15;" text="Add" />
+            <Label layoutX="64.0" layoutY="96.0" prefHeight="41.0" prefWidth="65.0" text="Name">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+            <Label layoutX="64.0" layoutY="171.0" prefHeight="41.0" prefWidth="88.0" text="Duration">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+            <Label layoutX="73.0" layoutY="394.0" prefHeight="41.0" prefWidth="74.0" text="Priority">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+            <Label layoutX="68.0" layoutY="462.0" prefHeight="41.0" prefWidth="81.0" text="Category">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+            <Label layoutX="206.0" layoutY="154.0" text="Hour">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="310.0" layoutY="154.0" text="Minute">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="deadlinePicker" layoutX="171.0" layoutY="248.0" prefHeight="41.0" prefWidth="217.0" promptText="deadline" style="-fx-background-color: white; -fx-border-color: grey;" />
+            <Label layoutX="66.0" layoutY="248.0" prefHeight="41.0" prefWidth="88.0" text="Date">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+            <Label layoutX="319.0" layoutY="303.0" text="Minute">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="206.0" layoutY="303.0" text="Hour">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="71.0" layoutY="322.0" prefHeight="41.0" prefWidth="52.0" text="At ">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="hourPicker" layoutX="172.0" layoutY="171.0" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+            <TextField fx:id="minutePicker" layoutX="291.0" layoutY="171.0" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+            <TextField fx:id="deadminutePicker" layoutX="291.0" layoutY="322.0" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+            <TextField fx:id="deadhourPicker" layoutX="172.0" layoutY="322.0" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: white; -fx-border-color: grey;" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
