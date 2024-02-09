@@ -1,0 +1,70 @@
+.buttonimage{
+
+-fx-max-width:40px;
+-fx-max-height:40px;
+-fx-background-size: contain;
+-fx-background-repeat: no-repeat;
+-fx-background-position: center;
+-fx-border-color: transparent;
+-fx-background-color: transparent;
+-fx-cursor:hand;
+
+
+}
+
+.buttonimage2{
+-fx-max-width:75px;
+-fx-max-height:75px;
+-fx-background-size: contain;
+-fx-background-repeat: no-repeat;
+-fx-background-position: center;
+-fx-border-color: transparent;
+-fx-background-color: transparent;
+-fx-cursor:hand;
+}
+
+.buttonimage:hover{
+-fx-background-color: #0C5776;
+}
+
+#1{
+-fx-background-image: url('../images/HomePage/calendar.png');
+}
+#2{
+-fx-background-image: url('../images/HomePage/projet.png');
+}
+#3{
+-fx-background-image: url('../images/HomePage/seDeconnecter.png');
+}
+#4{
+-fx-background-image: url('../images/HomePage/statistiques.png');
+}
+#5{
+-fx-background-image: url('../images/HomePage/tache.png');
+}
+#6{
+-fx-background-image: url('../images/HomePage/utilisateur.png');
+}
+#7{
+-fx-max-width:40px;
+-fx-max-height:40px;
+-fx-background-size: contain;
+-fx-background-repeat: no-repeat;
+-fx-background-position: center;
+-fx-border-color: transparent;
+-fx-background-color: transparent;
+-fx-cursor:hand;
+-fx-background-image: url('../images/Calendrier/erreur.png');
+}
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+   -fx-background-color : #FFFFFF ;
+   /*-fx-background-radius : 35;
+   -fx-border-radius : 35 ;*/
+}
+#8{
+-fx-background-image: url('../images/Taches/add.png');
+}
