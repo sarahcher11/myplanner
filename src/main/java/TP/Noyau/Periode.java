@@ -1,13 +1,15 @@
-package TP;
+package TP.Noyau;
 
-import TP.DateDebutException;
+import TP.Noyau.DateDebutException;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Cette classe caractérise une période donnée qui sétale entre une début et une date fin
  */
-public class Periode {
+public class Periode implements Serializable {
 
     /**
      * La date du début de la période
@@ -38,6 +40,11 @@ public class Periode {
         }
 
     }
+
+    public long getNumberOfDays() {
+        return ChronoUnit.DAYS.between(dateDebut, dateFin)+1;
+    }
+
 
     public LocalDate getDateDebut() {
         return dateDebut;
