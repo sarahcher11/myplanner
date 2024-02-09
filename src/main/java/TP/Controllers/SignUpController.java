@@ -1,11 +1,8 @@
 package TP.Controllers;
 
-import TP.App;
-import TP.MyDesktopPlanner;
-import TP.User;
+import TP.Noyau.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -13,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -24,7 +20,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class SignUpController {
 
@@ -34,6 +35,9 @@ public class SignUpController {
     private Button signupbutton;
   @FXML
     private TextField info;
+
+  @FXML
+  private  MyDesktopPlanner desktopPlanner=new MyDesktopPlanner();
 
 
   void showAlert(String message) {
@@ -66,7 +70,6 @@ public class SignUpController {
       Parent root = null;
       try {
         root = FXMLLoader.load(getClass().getResource("../loginPageF.fxml"));
-
         Scene scene = new Scene(root);
         Stage stage = (Stage) login.getScene().getWindow();
         stage.setResizable(false);
@@ -79,37 +82,46 @@ public class SignUpController {
   }
 
   @FXML
-  public void CreateNewAccount()
-  {
-    signupbutton.setOnMouseClicked(MouseEvent->{
-      if (info.getText().isEmpty())
-      {
+  public void CreateNewAccount() {
+    signupbutton.setOnMouseClicked(MouseEvent -> {
+      if (info.getText().isEmpty()) {
         showAlert("Vous devez entrer un pseudo");
-      }
-      else
-      {
-        String username=info.getText();
-        if(MyDesktopPlanner.trouverUtilisateur(username)==null)
-        {
-            try {
-              Parent root= FXMLLoader.load(this.getClass().getResource("../IntroducePeriode.fxml"));
-              Scene scene=new Scene(root);
-              Stage stage=new Stage();
-              stage.setScene(scene);
-              stage.show();
-              Stage ancienneStage=(Stage) signupbutton.getScene().getWindow();
-              ancienneStage.close();
+      } else {
+        String username = info.getText();
 
-            } catch (IOException e) {
-              throw new RuntimeException(e);
-            }
-          }
-          else {
+        try {
+
+            desktopPlanner=new MyDesktopPlanner();
+
+          if (desktopPlanner.trouverUtilisateur(username) == null) {
+            LoginController.setDesktopPlanner(desktopPlanner);
+            desktopPlanner.creerCompte(username);
+            LoginController.setUser(desktopPlanner.trouverUtilisateur(username));
+            Parent root = FXMLLoader.load(getClass().getResource("../IntroducePeriode.fxml"));
+            Scene scene=new Scene(root);
+            Stage stage=new Stage();
+            stage.setScene(scene);
+            stage.show();
+            desktopPlanner.serializeDesktopPlanner();
+            Stage ancienneStage = (Stage) signupbutton.getScene().getWindow();
+            ancienneStage.close();
+          } else {
             showAlert("Ce pseudo existe deja");
           }
+        } catch (IOException e) {
+          throw new RuntimeException(e);
         }
+      }
     });
   }
 
 
-}
+ }
+
+
+
+
+
+
+
+
